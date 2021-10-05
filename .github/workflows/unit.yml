@@ -47,6 +47,12 @@ jobs:
         env:
           RAILS_ENV: test
         working-directory: src/supermarket
+      - name: Simplecov Report
+        uses: aki77/simplecov-report-action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          failedThreshold: 90
+          resultPath: src/supermarket/coverage/.last_run.json
 
   fieri:
     runs-on: ubuntu-latest
@@ -65,11 +71,19 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+<<<<<<< HEAD
       - name: Set up ruby 2.7.4
         uses: ruby/setup-ruby@v1
         with:
           working-directory: src/supermarket/engines/fieri
           ruby-version: 2.7.4
+=======
+      - name: Set up ruby 2.7
+        uses: ruby/setup-ruby@v1
+        with:
+          working-directory: src/supermarket/engines/fieri
+          ruby-version: 2.7
+>>>>>>> e558ba9eea35dc207ef942d415d8ca8a22d08fd2
           bundler-cache: true
       - uses: r7kamura/rubocop-problem-matchers-action@v1 # this shows the failures in the PR
       - name: run specs
