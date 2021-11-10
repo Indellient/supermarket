@@ -6,15 +6,15 @@ gem "rails", "~> 6.1.4"
 gem "omniauth", "~> 2.0.0"
 gem "omniauth-chef-oauth2"
 gem "omniauth-github", "~> 2.0.0"
-gem "omniauth-oauth2", "~> 1.7.1"
+gem "omniauth-oauth2", "~> 1.7.2"
 gem "omniauth-rails_csrf_protection"
 gem "coderay" # markdown doc - syntax highlighting
 
-gem "sidekiq", "~> 4.2"
+gem "sidekiq", "~> 6.3"
 gem "sidekiq-cron"
 
 gem "aws-sdk-s3"
-gem "chef", "~> 17.6", require: false
+gem "chef", "~> 17.7", require: false
 gem "compass-rails"
 gem "ddtrace", require: false
 gem "dotenv"
@@ -88,11 +88,11 @@ group :development, :test do
   gem "factory_bot_rails", require: false
   gem "faker"
   gem "launchy"
-  gem "mail_view"
   gem "pry-byebug"
   gem "pry-rails"
   gem "rspec-rails"
   gem "rubocop-rails"
+  gem "letter_opener_web", "~> 2.0"
 
   # Pinned to be greater than or equal to 1.0.0.pre because the gems were prior
   # to 1.0.0 release when added
