@@ -245,7 +245,7 @@ default['supermarket']['ssl']['directory'] = '/var/opt/supermarket/ssl'
 
 # Paths to the SSL certificate and key files. If these are not provided we will
 # attempt to generate a self-signed certificate and use that instead.
-default['supermarket']['ssl']['enabled'] = true
+default['supermarket']['ssl']['enable'] = true
 default['supermarket']['ssl']['certificate'] = nil
 default['supermarket']['ssl']['certificate_key'] = nil
 default['supermarket']['ssl']['ssl_dhparam'] = nil
@@ -306,7 +306,7 @@ default['supermarket']['unicorn']['before_fork'] = nil
 default['supermarket']['unicorn']['after_fork'] = nil
 
 # ## Database
-default['supermarket']['database']['enabled'] = true
+default['supermarket']['database']['enable'] = true
 default['supermarket']['database']['user'] = node['supermarket']['postgresql']['username']
 default['supermarket']['database']['name'] = 'supermarket'
 default['supermarket']['database']['host'] = node['supermarket']['postgresql']['listen_address']
@@ -505,7 +505,7 @@ default['supermarket']['statsd_port'] = nil
 default['supermarket']['announcement_text'] = nil
 
 # enable/disable miscelaneous services
-default['supermarket']['config']['enabled'] = true
-default['supermarket']['log_management']['enabled'] = true
+default['supermarket']['config']['enable'] = true
+default['supermarket']['log_management']['enable'] = true
 # This service is essential for supermarket to run and this flag should never be set to false.
-default['supermarket']['app']['enabled'] = true
+default['supermarket']['app']['enable'] = true
