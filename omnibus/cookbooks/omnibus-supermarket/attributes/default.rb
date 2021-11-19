@@ -504,7 +504,7 @@ default['supermarket']['statsd_port'] = nil
 # announcement text for banner
 default['supermarket']['announcement_text'] = nil
 
-# enable/disable miscelaneous services
+# enable/disable miscellaneous services
 default['supermarket']['config']['enable'] = true
 default['supermarket']['log_management']['enable'] = true
 # This service is essential for supermarket to run and this flag should never be set to false.
