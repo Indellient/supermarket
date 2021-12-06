@@ -50,8 +50,7 @@ Rails.application.configure do
   # For running quality metrics we need to stop rails from redirecting all requests to https
   config.force_ssl = (ENV["FORCE_SSL"] == "true")
 
-  config.ssl_options = { redirect: { exclude: -> request { request.host =~ /#{ENV["FIERI_URL"]}/ } } }
-
+  config.ssl_options = { redirect: { exclude: ->(request) { request.host =~ /localhost/ } } }
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
