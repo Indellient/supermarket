@@ -1,9 +1,9 @@
-require 'open-uri' unless defined?(OpenURI)
-require 'rubygems/package' unless defined?(Gem::Package)
-require 'mixlib/archive' unless defined?(Mixlib::Archive)
-require 'filemagic'
+require "open-uri" unless defined?(OpenURI)
+require "rubygems/package" unless defined?(Gem::Package)
+require "mixlib/archive" unless defined?(Mixlib::Archive)
+require "filemagic"
 require "quality_metric/cookstyle_helpers"
-require 'openssl' unless defined?(OpenSSL)
+require "openssl"
 
 class CookbookArtifact
   #
@@ -12,7 +12,16 @@ class CookbookArtifact
   attr_accessor :url, :job_id, :work_dir
 
   FILE_SIZE_LIMIT = 2**20
-  OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
+
+  # This is needed since artifact url which is pointing to https
+  # format cannot work with a strict ssl policy in a setup without
+  # SSL cert. This check can be escaped if we are sure app will always have a
+  # a valid SSL cert
+  if ENV["CHEF_OAUTH2_VERIFY_SSL"].present? &&
+    ENV["CHEF_OAUTH2_VERIFY_SSL"] == "false"
+    OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
+  end
+
 
   #
   # Initializes a +CookbookArtifact+ downloading and unarchiving the
@@ -23,7 +32,7 @@ class CookbookArtifact
   #
   def initialize(url, jid)
     @url = url
-    @job_id = jid || 'nojobid'
+    @job_id = jid || "nojobid"
     @work_dir = File.join(Dir.tmpdir, job_id)
   end
 
@@ -40,10 +49,11 @@ class CookbookArtifact
   # work_dir here represents the path where cookbook is uploaded
   def criticize
     prep
-    result,_status = CookstyleHelpers.process_artifact(work_dir)
-    feedback = result.to_s.gsub("#{work_dir}/", '')
-    [feedback,_status]
+    result, _status = CookstyleHelpers.process_artifact(work_dir)
+    feedback = result.to_s.gsub("#{work_dir}/", "")
+    [feedback, _status]
   end
+
   #
   # Returns a list of binaries found in a cookbook
   #
@@ -58,9 +68,9 @@ class CookbookArtifact
       when File.directory?(file)
         next
       when binary?(file)
-        binaries_found << file.gsub("#{work_dir}/", '')
+        binaries_found << file.gsub("#{work_dir}/", "")
       when too_big?(file)
-        binaries_found << file.gsub("#{work_dir}/", '') + " (size > #{FILE_SIZE_LIMIT} bytes)"
+        binaries_found << file.gsub("#{work_dir}/", "") + " (size > #{FILE_SIZE_LIMIT} bytes)"
       end
     end
 
@@ -85,8 +95,8 @@ class CookbookArtifact
   # @return [Tempfile] the artifact
   #
   def download
-    File.open(Tempfile.new('archive'), 'wb') do |saved_file|
-      URI.open(url, 'rb') do |read_file|
+    File.open(Tempfile.new("archive"), "wb") do |saved_file|
+      URI.open(url, "rb") do |read_file|
         saved_file.write(read_file.read)
       end
       saved_file

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   VERSION_PATTERN = /latest|([0-9_\-\.]+)/.freeze unless defined?(VERSION_PATTERN)
 
@@ -26,12 +27,10 @@ Rails.application.routes.draw do
       post "/cookbook-versions/cookstyle_evaluation" => "quality_metrics#cookstyle_evaluation", as: :cookbook_versions_cookstyle_evaluation, constraints: proc { Feature.active?(:fieri) }
       post "/cookbook-versions/collaborators_evaluation" => "quality_metrics#collaborators_evaluation", as: :cookbook_versions_collaborators_evaluation, constraints: proc { Feature.active?(:fieri) }
       post "/cookbook-versions/publish_evaluation" => "quality_metrics#publish_evaluation", as: :cookbook_versions_publish_evaluation, constraints: proc { Feature.active?(:fieri) }
-      post "/cookbook-versions/license_evaluation" => "quality_metrics#license_evaluation", as: :cookbook_versions_license_evaluation, constraints: proc { Feature.active?(:fieri) }
 
       post "/quality_metrics/cookstyle_evaluation" => "quality_metrics#cookstyle_evaluation", as: :quality_metrics_cookstyle_evaluation, constraints: proc { Feature.active?(:fieri) }
       post "/quality_metrics/collaborators_evaluation" => "quality_metrics#collaborators_evaluation", as: :quality_metrics_collaborators_evaluation, constraints: proc { Feature.active?(:fieri) }
       post "/quality_metrics/publish_evaluation" => "quality_metrics#publish_evaluation", as: :quality_metrics_publish_evaluation, constraints: proc { Feature.active?(:fieri) }
-      post "/quality_metrics/license_evaluation" => "quality_metrics#license_evaluation", as: :quality_metrics_license_evaluation, constraints: proc { Feature.active?(:fieri) }
       post "/quality_metrics/supported_platforms_evaluation" => "quality_metrics#supported_platforms_evaluation", as: :quality_metrics_supported_platforms_evaluation, constraints: proc { Feature.active?(:fieri) }
       post "/quality_metrics/contributing_file_evaluation" => "quality_metrics#contributing_file_evaluation", as: :quality_metrics_contributing_file_evaluation, constraints: proc { Feature.active?(:fieri) }
       post "/quality_metrics/testing_file_evaluation" => "quality_metrics#testing_file_evaluation", as: :quality_metrics_testing_file_evaluation, constraints: proc { Feature.active?(:fieri) }

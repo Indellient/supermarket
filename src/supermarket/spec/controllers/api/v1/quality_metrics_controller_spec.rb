@@ -240,18 +240,6 @@ describe Api::V1::QualityMetricsController do
     end
   end
 
-  describe "#license_evaluation (deprecated)" do
-    it "returns a 410 Gone" do
-      post(:license_evaluation, params: { literally: "anything" })
-      expect(response.status.to_i).to eql(410)
-    end
-
-    it "includes a friendly message in the response" do
-      post(:license_evaluation, params: { literally: "anything" })
-      expect(response.body).to match(/deprecated/)
-    end
-  end
-
   describe "#supported_platforms_evaluation" do
     let(:cookbook) { create(:cookbook) }
     let!(:version) { create(:cookbook_version, cookbook: cookbook) }

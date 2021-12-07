@@ -1,7 +1,7 @@
 class Api::V1::QualityMetricsController < Api::V1Controller
-  before_action :check_cookbook_name_present, except: :license_evaluation
-  before_action :check_authorization, except: :license_evaluation
-  before_action :find_cookbook_version, except: :license_evaluation
+  before_action :check_cookbook_name_present
+  before_action :check_authorization
+  before_action :find_cookbook_version
 
   #
   # POST /api/v1/quality_metrics/cookstyle_evaluation
@@ -60,21 +60,6 @@ class Api::V1::QualityMetricsController < Api::V1Controller
     )
 
     head 200
-  end
-
-  #
-  # POST /api/v1/cookbook-versions/license_evaluation
-  #
-  # License evaluation is handled by Foodcritic now, so this endpoint
-  # is deprecation and will no longer accept License metric results.
-  # If the +CookbookVersion+ does not exist, render a 404 not_found.
-  #
-  # Will return a 410 Gone because this resource has been intentionally removed
-  #
-  def license_evaluation
-    response = { message: "Endpoint deprecated. License metric results are now produced by Foodcritic." }
-    render json: response,
-           status: 410
   end
 
   #

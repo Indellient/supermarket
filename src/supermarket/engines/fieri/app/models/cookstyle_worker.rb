@@ -7,7 +7,6 @@ class CookstyleWorker
   def perform(params)
     cookbook = CookbookArtifact.new(params["artifact_url"], jid)
     feedback, status = cookbook.criticize
-    puts " Posting with #{feedback} #{status}"
     make_post(params, feedback, status)
     cookbook.cleanup
   rescue StandardError => e
@@ -40,7 +39,6 @@ class CookstyleWorker
   end
 
   def format_feedback(feedback, status)
-    puts " Formatting feedback #{feedback} and status #{status}"
     if !status.nil?
       "#{feedback}\n#{cookstyle_info}"
     else
