@@ -347,6 +347,17 @@ CLA signing still works, but has been disabled in the public site in favor of [t
 * cla
 * join_ccla
 
+### Fieri Feature
+For Fieri feature to work properly, following keys in supermarket.rb need to be set and supermarket need to be reconfigured using command `supermarket-ctl reconfigure`
+
+1. default['supermarket']['fieri_url']
+2. default['supermarket']['fieri_supermarket_endpoint']
+3. default['supermarket']['fieri_key']
+
+`fieri_url` and `fieri_supermarket_endpoint` can be left to the default value mentioned.\
+`fieri_key` cannot be nil and value can be any random string. One example to generate a random string for fieri_key is by using - `openssl rand -base64 32`
+
+
 ## License
 
 |                      |                                          |
